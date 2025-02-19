@@ -59,6 +59,24 @@ namespace ConsoleApp4
 
   Console.WriteLine($"Прошло {years} лет, {months} месяцев и {days} дней.");
 
+---------------------------ФАЙЛ ------------------------------------
+class Program
+{
+    static void Main()
+    {
+        string inputFilePath = "input.txt";
+        string outputFilePath = "output.txt";
+
+        string text = File.ReadAllText(inputFilePath);
+        text = text.Replace(" ", "_").ToLower();
+
+        File.WriteAllText(outputFilePath, text);
+        Console.WriteLine("Файл успешно обработан.");
+    }
+}
+
+
+
 
 -------------------------camelCase-------------------------------
  
