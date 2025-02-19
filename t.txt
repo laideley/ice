@@ -1,0 +1,370 @@
+
+
+Задание 4 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp3
+{
+    public class Calculator
+    {
+        public int Add(int a, int b)
+        {
+            return a + b;
+
+        }
+    }
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            Calculator calculator = new Calculator();
+            int a = Convert.ToInt32(Console.ReadLine());
+            int b = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(calculator.Add(a, b));
+        }
+    }
+}
+
+
+
+
+using ConsoleApp3;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
+namespace UnitTestProject1
+{
+    [TestClass]
+    public class UnitTest1
+    {
+
+        [TestMethod]
+        public void Add_PositiveNumbers_ReturnsCorrectSum()
+        {
+            var calculator = new Calculator();
+            int a = 5;
+            int b = 10;
+
+            int result = calculator.Add(a, b);
+
+            Assert.AreEqual(15, result);
+        }
+
+        [TestMethod]
+        public void Add_NegativeNumbers_ReturnsCorrectSum()
+        {
+            var calculator = new Calculator();
+            int a = -5;
+            int b = -10;
+
+            int result = calculator.Add(a, b);
+
+            Assert.AreEqual(-15, result);
+        }
+
+        [TestMethod]
+        public void Add_ZeroAndZero_ReturnsZero()
+        {
+         
+            var calculator = new Calculator();
+            int a = 0;
+            int b = 0;
+
+            int result = calculator.Add(a, b);
+
+            Assert.AreEqual(0, result);
+        }
+    }
+}
+
+
+Задание 5
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp3
+{
+    public class Calculator
+    {
+        public int Divide(int a, int b)
+        {
+            if (b == 0)
+                throw new DivideByZeroException("Cannot divide by zero.");
+            return a / b;
+        }
+    }
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            Calculator calculator = new Calculator();
+
+            int a = Convert.ToInt32(Console.ReadLine());
+            int b = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(calculator.Divide(a, b));
+        }
+    }
+
+}
+
+
+
+using NUnit.Framework;
+using ConsoleApp3;
+
+
+namespace TestProject1
+{
+    public class Tests
+    {
+        [Test]
+        public void Divide_NonZeroDivisor_ReturnsCorrectResult()
+        {
+
+            var calculator = new Calculator();
+            int a = 10;
+            int b = 2;
+
+            int result = calculator.Divide(a, b);
+
+            Assert.AreEqual(5, result);
+        }
+
+        [Test]
+        public void Divide_ByZero_ThrowsDivideByZeroException()
+        {
+            var calculator = new Calculator();
+            int a = 10;
+            int b = 0;
+
+            Assert.Throws<DivideByZeroException>(() => calculator.Divide(a, b));
+        }
+    }
+}
+
+
+Задание 6
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WOW
+{
+    public static class Calculator
+    {
+        static void Main(string[] args)
+        {
+            int number = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(IsEven(number));
+        }
+        public static bool IsEven(int number)
+        {
+            return number % 2 == 0;
+        }
+    }
+}
+
+
+
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WOW; 
+
+namespace MS
+{
+    [TestClass]
+    public class CalculatorTests
+    {
+        [DataTestMethod]
+        [DataRow(2, true)]    // Чет
+        [DataRow(3, false)]   // Нечет
+        [DataRow(0, true)]    // Ноль
+        [DataRow(-4, true)]  // Отриц
+        [DataRow(-5, false)] // Отриц
+        public void IsEven_Test(int number, bool expectedResult)
+        {
+            bool result = Calculator.IsEven(number);
+            Assert.AreEqual(expectedResult, result);
+        }
+    }
+}
+
+Задание 7
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WOW
+{
+
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            Numbers numbers = new Numbers();
+            int a = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(numbers.Factorial(a));
+        }
+    }
+    public class Numbers
+    {
+        public long Factorial(int n)
+        {
+            if (n < 0)
+                throw new ArgumentException("Факториал отрицательного числа не определен.");
+
+            if (n == 0 || n == 1)
+                return 1;
+
+            long result = 1;
+            for (int i = 2; i <= n; i++)
+            {
+                result *= i;
+            }
+            return result;
+        }
+    }
+
+
+}
+
+
+
+
+using WOW;
+
+namespace TestProject1
+{
+    public class Tests
+    {
+        [Test]
+        public void Factorial_PositiveNumber_ReturnsCorrectResult()
+        {
+            var numbers = new Numbers();
+            int n = 5;
+
+            long result = numbers.Factorial(n);
+
+            Assert.AreEqual(120, result);
+        }
+
+        [Test]
+        public void Factorial_Zero_ReturnsOne()
+        {
+            var numbers = new Numbers();
+            int n = 0;
+
+ 
+            long result = numbers.Factorial(n);
+
+
+            Assert.AreEqual(1, result);
+        }
+
+
+        [Test]
+        public void Factorial_NegativeNumber_ThrowsArgumentException()
+        {
+    
+            var numbers = new Numbers();
+            int n = -5;
+
+            Assert.Throws<ArgumentException>(() => numbers.Factorial(n));
+        }
+    }
+}
+
+Задание 8
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WOW
+{
+
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            StringUtils stringUtils = new StringUtils();
+            String text = Console.ReadLine();
+            Console.WriteLine(stringUtils.IsPalindrome(text));
+        }
+    }
+    public class StringUtils
+    {
+        public bool IsPalindrome(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return false;
+            string cleanedText = new string(text.Where(char.IsLetterOrDigit).ToArray()).ToLower();
+            string reversedText = new string(cleanedText.Reverse().ToArray());
+
+            return cleanedText == reversedText;
+        }
+    }
+
+}
+
+
+
+
+using WOW;
+
+namespace TestProject2
+{
+    public class UnitTest1
+    {
+        [Fact]
+        public void IsPalindrome_EmptyString_ReturnsFalse()
+        {
+
+            var stringUtils = new StringUtils();
+            string input = "";
+
+            bool result = stringUtils.IsPalindrome(input);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void IsPalindrome_NullString_ReturnsFalse()
+        {
+
+            var stringUtils = new StringUtils();
+            string input = null;
+
+            bool result = stringUtils.IsPalindrome(input);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void IsPalindrome_SimplePalindrome_ReturnsTrue()
+        {
+            var stringUtils = new StringUtils();
+            string input = "ded";
+
+            bool result = stringUtils.IsPalindrome(input);
+
+            Assert.True(result);
+        }
+    }
+}
