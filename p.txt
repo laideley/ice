@@ -1,0 +1,149 @@
+---------------------------------RANDOM---------------------------
+using System;
+namespace ConsoleApp4
+{
+    class Program
+    {
+        static void Main()
+        {
+            Random random = new Random();
+            int number = random.Next(1, 11);
+            bool guessed = false;
+
+            while (!guessed)
+            {
+                Console.Write("Угадайте число от 1 до 10: ");
+                int guess = int.Parse(Console.ReadLine());
+            
+
+                if (guess == number)
+                {
+                    Console.WriteLine("Поздравляем! Вы угадали число.");
+                    guessed = true;
+                }
+                else
+                {
+                    Console.Write("Не угадали. Хотите попробовать еще раз? (да/нет): ");
+                    string answer = Console.ReadLine();
+                    if (answer.ToLower() != "да")
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+--------------ДАТА----------------------------------------------
+  Console.Write("Введите дату рождения (гггг-мм-дд): ");
+  DateTime birthDate = DateTime.Parse(Console.ReadLine());
+  DateTime now = DateTime.Now;
+
+  int years = now.Year - birthDate.Year;
+  int months = now.Month - birthDate.Month;
+  int days = now.Day - birthDate.Day;
+
+  if (days < 0)
+  {
+      months--;
+      days += DateTime.DaysInMonth(now.Year, now.Month);
+  }
+
+  if (months < 0)
+  {
+      years--;
+      months += 12;
+  }
+
+  Console.WriteLine($"Прошло {years} лет, {months} месяцев и {days} дней.");
+
+
+-------------------------camelCase-------------------------------
+ 
+static void Main()
+ {
+     string input = "hello world example";
+     string camelCase = ToCamelCase(input);
+     Console.WriteLine(camelCase);
+
+     File.WriteAllText("output.txt", camelCase);
+ }
+
+ static string ToCamelCase(string input)
+ {
+     string[] words = input.Split(' ');
+     for (int i = 0; i < words.Length; i++)
+     {
+         if (i == 0)
+         {
+             words[i] = words[i].ToLower();
+         }
+         else
+         {
+             words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+         }
+     }
+     return string.Join("", words);
+ }
+
+
+
+------------------------------Реверс длинных слов-------------------------------------
+   
+ static void Main()
+    {
+        string input = "This is a test string";
+        string result = ReverseLongWords(input);
+        Console.WriteLine(result);
+    }
+
+    static string ReverseLongWords(string input)
+    {
+        string[] words = input.Split(' ');
+        for (int i = 0; i < words.Length; i++)
+        {
+            if (words[i].Length >= 5)
+            {
+                words[i] = new string(words[i].Reverse().ToArray());
+            }
+        }
+        return string.Join(" ", words);
+    }
+
+
+------------------------------------Номер телефона-----------------------------------------------------
+
+  static void Main()
+  {
+      int[] numbers = { 1, 2, 3, 4, 8, 6, 7, 5, 9, 0 };
+      string phoneNumber = FormatPhoneNumber(numbers);
+      Console.WriteLine(phoneNumber);
+  }
+
+  static string FormatPhoneNumber(int[] numbers)
+  {
+      return $"({numbers[0]}{numbers[1]}{numbers[2]}) {numbers[3]}{numbers[4]}{numbers[5]}-{numbers[6]}{numbers[7]}{numbers[8]}{numbers[9]}";
+  }
+
+
+-------------------------------------Перестановка чисел-----------------------------------------------
+
+class Program
+{
+    static void Main()
+    {
+        int number = 42145;
+        int result = RearrangeDigits(number);
+        Console.WriteLine(result);
+    }
+
+    static int RearrangeDigits(int number)
+    {
+        char[] digits = number.ToString().ToCharArray();
+        Array.Sort(digits);
+        Array.Reverse(digits);
+        return int.Parse(new string(digits));
+    }
+}
